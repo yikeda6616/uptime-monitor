@@ -10,11 +10,10 @@ const StringDecoder = require('string_decoder').StringDecoder;
 
 // The server should respond to all requests with a string
 const server = http.createServer((req, res, next) => {
-  // Get the URL and parse it
-  const parsedUrl = url.parse(req.url, true);
+  const parsedUrl = url.parse(req.url, true); // Get the URL and parse it
 
-  // Get the path
-  const path = parsedUrl.pathname;
+  const path = parsedUrl.pathname; // Get the path
+
   const trimmedPath = path.replace(/^\/+|\/+$/g, ''); // trim final slash
 
   // Get the query string as an object
@@ -32,15 +31,12 @@ const server = http.createServer((req, res, next) => {
   req.on('end', () => {
     buffer += decoder.end();
 
-    // Send the response
-    res.end('Hello World\n');
+    res.end('Hello World\n'); // Send the response
 
-    // Log the request path
     console.log(`Request received with this payload: ${buffer}`);
   });
 });
 
-// Start the server, and have it listen on PORT 3000
 server.listen(3000, () => {
   console.log('The server is listening on PORT 3000');
 });

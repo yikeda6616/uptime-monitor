@@ -26,6 +26,7 @@ const httpsServerOptions = {
   key: fs.readFileSync('./https/key.pem'),
   cert: fs.readFileSync('./https/cert.pem')
 };
+
 const httpsServer = https.createServer(httpsServerOptions, (req, res) => {
   unifiedServer(req, res);
 });
@@ -99,10 +100,9 @@ const unifiedServer = function(req, res) {
 // Define the handlers
 const handlers = {};
 
-// Sample handler
-handlers.sample = function(data, callback) {
-  // Callback a http status code, and a payload object
-  callback(406, { name: 'sample handler' });
+// Ping handler
+handlers.ping = function(data, callback) {
+  callback(200);
 };
 
 // Not found handler
@@ -112,5 +112,5 @@ handlers.notFound = function(data, callback) {
 
 // Define a request router object
 const router = {
-  sample: handlers.sample
+  ping: handlers.ping
 };

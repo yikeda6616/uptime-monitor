@@ -76,18 +76,16 @@ const unifiedServer = function(req, res) {
     };
 
     // Route the request to the handler specified in the router
-    chosenHandler(data, function(statusCode, payload) {
+    chosenHandler(data, (statusCode, payload) => {
       // Use the status code called back by the handler, or default to 200
       statusCode = typeof statusCode == 'number' ? statusCode : 200;
 
       // Use the payload called back by the handler, or default to an empty object
       payload = typeof payload == 'object' ? payload : {};
 
-      // Convert the payload to a string
-      const payloadString = JSON.stringify(payload);
+      const payloadString = JSON.stringify(payload); // Convert the payload to a string
 
-      // Return the response
-      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Content-Type', 'application/json'); // Return the response
       res.writeHead(statusCode);
       res.end(payloadString);
 
@@ -98,19 +96,23 @@ const unifiedServer = function(req, res) {
 };
 
 // Define the handlers
-const handlers = {};
-
-// Ping handler
-handlers.ping = function(data, callback) {
-  callback(200);
-};
-
-// Not found handler
-handlers.notFound = function(data, callback) {
-  callback(404);
+const handlers = {
+  // Ping handler
+  ping: function(data, callback) {
+    callback(200);
+  },
+  // Hello handler
+  hello: function(data, callback) {
+    callback(200, { message: 'Hello World!' });
+  },
+  // Not found handler
+  notFound: function(data, callback) {
+    callback(404);
+  }
 };
 
 // Define a request router object
 const router = {
-  ping: handlers.ping
+  ping: handlers.ping,
+  hello: handlers.hello
 };

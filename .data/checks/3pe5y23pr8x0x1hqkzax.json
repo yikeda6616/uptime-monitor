@@ -1,1 +1,1 @@
-{"id":"3pe5y23pr8x0x1hqkzax","userPhone":"5551234569","protocol":"http","url":"google.com","method":"get","successCodes":[200,201],"timeoutSeconds":3}
+{"id":"3pe5y23pr8x0x1hqkzax","userPhone":"5551234569","protocol":"https","url":"yahoo.com","method":"put","successCodes":[200,201,403],"timeoutSeconds":2}

@@ -12,12 +12,6 @@ const config = require('./lib/config');
 const fs = require('fs');
 const handlers = require('./lib/handlers');
 const helpers = require('./lib/helpers');
-const twilio = require('./lib/twilio');
-
-// TODO: Get rid of this
-helpers.sendTwilioSms(twilio.phone, 'Hello!', err => {
-  console.log('this was error ', err);
-});
 
 // Instantiate the HTTP server
 const httpServer = http.createServer((req, res) => {

@@ -1,2 +1,4 @@
 */*.pem
 lib/twilio.js
+.logs/
+.data/

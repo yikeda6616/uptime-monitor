@@ -98,18 +98,18 @@ app.bindForms = function() {
   document.querySelector('form').addEventListener('submit', function(e) {
     // Stop it from submitting
     e.preventDefault();
-    var formId = this.id;
-    var path = this.action;
-    var method = this.method.toUpperCase();
+    const formId = this.id;
+    const path = this.action;
+    const method = this.method.toUpperCase();
 
     // Hide the error message (if it's currently shown due to a previous error)
     document.querySelector('#' + formId + ' .formError').style.display =
       'hidden';
 
     // Turn the inputs into a payload
-    var payload = {};
-    var elements = this.elements;
-    for (var i = 0; i < elements.length; i++) {
+    const payload = {};
+    const elements = this.elements;
+    for (let i = 0; i < elements.length; i++) {
       if (elements[i].type !== 'submit') {
         var valueOfElement =
           elements[i].type == 'checkbox'
@@ -127,17 +127,16 @@ app.bindForms = function() {
       // Display an error on the form if needed
       if (statusCode !== 200) {
         // Try to get the error from the api, or set a default error message
-        var error =
+        const error =
           typeof responsePayload.Error == 'string'
             ? responsePayload.Error
             : 'An error has occured, please try again';
 
         // Set the formError field with the error text
-        document.querySelector('#' + formId + ' .formError').innerHTML = error;
+        document.querySelector(`#${formId} .formError`).innerHTML = error;
 
         // Show (unhide) the form error field on the form
-        document.querySelector('#' + formId + ' .formError').style.display =
-          'block';
+        document.querySelector(`#${formId} .formError`).style.display = 'block';
       } else {
         // If successful, send to form response processor
         app.formResponseProcessor(formId, payload, responsePayload);
@@ -148,7 +147,7 @@ app.bindForms = function() {
 
 // Form response processor
 app.formResponseProcessor = function(formId, requestPayload, responsePayload) {
-  var functionToCall = false;
+  let functionToCall = false;
   if (formId == 'accountCreate') {
     // @TODO Do something here now that the account has been created successfully
   }
